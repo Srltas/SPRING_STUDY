@@ -23,6 +23,7 @@
 hs_err_pid*
 
 # 설정파일
+.settings
 .classpath
 .project
 .springBeans

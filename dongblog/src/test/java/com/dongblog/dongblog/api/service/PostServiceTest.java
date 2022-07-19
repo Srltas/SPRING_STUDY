@@ -3,6 +3,7 @@ package com.dongblog.dongblog.api.service;
 import com.dongblog.dongblog.api.domain.Post;
 import com.dongblog.dongblog.api.repository.PostRepository;
 import com.dongblog.dongblog.api.request.PostCreate;
+import com.dongblog.dongblog.api.response.PostResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -50,17 +51,17 @@ class PostServiceTest {
     void test2() {
         //given
         Post requestPost = Post.builder()
-                .title("foo")
+                .title("123456789012345")
                 .content("bar")
                 .build();
         postRepository.save(requestPost);
 
         //when
-        Post post = postService.get(requestPost.getId());
+        PostResponse response = postService.get(requestPost.getId());
 
         //then
-        assertNotNull(post);
-        assertEquals("foo", post.getTitle());
-        assertEquals("bar", post.getContent());
+        assertNotNull(response);
+        assertEquals("1234567890", response.getTitle());
+        assertEquals("bar", response.getContent());
     }
 }

@@ -3,6 +3,7 @@ package com.dongblog.dongblog.api.service;
 import com.dongblog.dongblog.api.domain.Post;
 import com.dongblog.dongblog.api.repository.PostRepository;
 import com.dongblog.dongblog.api.request.PostCreate;
+import com.dongblog.dongblog.api.response.PostResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -23,10 +24,20 @@ public class PostService {
         postRepository.save(post);
     }
 
-    public Post get(Long id) {
+    public PostResponse get(Long id) {
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 글입니다."));
 
-        return post;
+        PostResponse response = PostResponse.builder()
+                .id(post.getId())
+                .title(post.getTitle())
+                .content(post.getContent())
+                .build();
+
+        /**
+         * Controller -> WebService -> Repository
+         */
+
+        return response;
     }
 }

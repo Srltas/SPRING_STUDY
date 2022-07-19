@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -26,9 +27,17 @@ public class PostController {
      * /posts/{postId} -> 글 한개만 조회
      */
 
+    //조회 API
+    //단건 조회 API
+    //여러개의 글을 조회 API -> /posts
+
     @GetMapping("/posts/{postId}")
-    public PostResponse get(@PathVariable(name = "postId") Long id) {
-        PostResponse response = postService.get(id);
-        return response;
+    public PostResponse get(@PathVariable Long postId) {
+        return postService.get(postId);
+    }
+
+    @GetMapping("/posts")
+    public List<PostResponse> getList() {
+        return postService.getList();
     }
 }

@@ -9,11 +9,16 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.springframework.data.domain.Sort.Direction.DESC;
 
 @SpringBootTest
 class PostServiceTest {
@@ -68,25 +73,27 @@ class PostServiceTest {
     }
 
     @Test
-    @DisplayName("글 여러개 조회")
+    @DisplayName("글 1페이지 조회")
     void test3() {
         //given
-        postRepository.saveAll(List.of(
-                Post.builder()
-                        .title("123456789012345")
-                        .content("bar")
-                        .build(),
-                Post.builder()
-                        .title("123456789012345")
-                        .content("bar")
-                        .build()
+        List<Post> requestPosts = IntStream.range(1, 31)
+                        .mapToObj(i -> Post.builder()
+                                .title("동블로그 제목" + i)
+                                .content("내일도 출근" + i)
+                                .build())
+                        .collect(Collectors.toList());
+        postRepository.saveAll(requestPosts);
 
-        ));
+        //sql -> select, limit, offset
+
+        Pageable pageable = PageRequest.of(0, 5, DESC, "id");
 
         //when
-        List<PostResponse> posts = postService.getList();
+        List<PostResponse> posts = postService.getList(pageable);
 
         //then
-        assertEquals(2L, posts.size());
+        assertEquals(5L, posts.size());
+        assertEquals("동블로그 제목30", posts.get(0).getTitle());
+        assertEquals("동블로그 제목26", posts.get(4).getTitle());
     }
 }

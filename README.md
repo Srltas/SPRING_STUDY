@@ -33,3 +33,11 @@
    - Sort로 페이지 정렬 순서 변경 학습
    - application 파일 페이징 설정
    - @PageableDefault
+   
+### 07-23
+ - 게시글 페이징(QueryDSL)
+   - QueryDSL 환경설정
+   - 페이징 처리 변경
+ - 게시글 수정
+   - PostEditor를 만들어 수정이 가능한 부분만 수정할 수 있도록 만듦
+   - 수정 테스트 코드 작성

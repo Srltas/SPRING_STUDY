@@ -1,11 +1,11 @@
 package com.dongblog.dongblog.api.controller;
 
 import com.dongblog.dongblog.api.request.PostCreate;
+import com.dongblog.dongblog.api.request.PostSearch;
 import com.dongblog.dongblog.api.response.PostResponse;
 import com.dongblog.dongblog.api.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -38,7 +38,7 @@ public class PostController {
     }
 
     @GetMapping("/posts")
-    public List<PostResponse> getList(Pageable pageable) {
-        return postService.getList(pageable);
+    public List<PostResponse> getList(PostSearch postSearch) {
+        return postService.getList(postSearch);
     }
 }

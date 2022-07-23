@@ -1,6 +1,7 @@
 package com.dongblog.dongblog.api.controller;
 
 import com.dongblog.dongblog.api.request.PostCreate;
+import com.dongblog.dongblog.api.request.PostEdit;
 import com.dongblog.dongblog.api.request.PostSearch;
 import com.dongblog.dongblog.api.response.PostResponse;
 import com.dongblog.dongblog.api.service.PostService;
@@ -40,5 +41,10 @@ public class PostController {
     @GetMapping("/posts")
     public List<PostResponse> getList(PostSearch postSearch) {
         return postService.getList(postSearch);
+    }
+
+    @PatchMapping("/posts/{postId}")
+    public void edit(@PathVariable Long postId, @RequestBody PostEdit postEdit) {
+        postService.edit(postId, postEdit);
     }
 }

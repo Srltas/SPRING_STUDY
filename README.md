@@ -41,3 +41,11 @@
  - 게시글 수정
    - PostEditor를 만들어 수정이 가능한 부분만 수정할 수 있도록 만듦
    - 수정 테스트 코드 작성
+   
+### 07-26
+ - 게시글 삭제
+   - 삭제에 대한 테스트 코드 작성
+ - 예외처리
+   - controller, service 예외처리에 대한 테스트 코드 작성
+   - 커스텀 예외(PostNotFound, InvalidRequest)를 만들어 예외처리
+   - 상위 커스텀 예외(DongBlogException)를 만들어서 예외 공통처리

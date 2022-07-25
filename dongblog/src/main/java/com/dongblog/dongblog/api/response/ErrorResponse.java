@@ -17,16 +17,18 @@ import java.util.Map;
  */
 
 @Getter
+//@JsonInclude(value = JsonInclude.Include.NON_EMPTY) //비어있는 값은 JSON으로 만들어서 보내지 않게 할 수 있다
 public class ErrorResponse {
 
     private final String code;
     private final String message;
-    private final Map<String, String> validation = new HashMap<>();
+    private final Map<String, String> validation;
 
     @Builder
-    public ErrorResponse(String code, String message) {
+    public ErrorResponse(String code, String message, Map<String, String> validation) {
         this.code = code;
         this.message = message;
+        this.validation = validation != null ? validation : new HashMap<>();
     }
 
     public void addValidation(String fieldName, String errorMessage) {

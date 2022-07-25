@@ -1,6 +1,7 @@
 package com.dongblog.dongblog.api.service;
 
 import com.dongblog.dongblog.api.domain.Post;
+import com.dongblog.dongblog.api.exception.PostNotFound;
 import com.dongblog.dongblog.api.repository.PostRepository;
 import com.dongblog.dongblog.api.request.PostCreate;
 import com.dongblog.dongblog.api.request.PostEdit;
@@ -16,8 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class PostServiceTest {
@@ -161,5 +161,53 @@ class PostServiceTest {
 
         //then
         assertEquals(0, postRepository.count());
+    }
+
+    @Test
+    @DisplayName("글 1개 조회 - 존재하지 않는 글")
+    void test7() {
+        //given
+        Post post = Post.builder()
+                .title("동블로그")
+                .content("내일도 출근..")
+                .build();
+        postRepository.save(post);
+
+        //expected
+        PostNotFound e = assertThrows(PostNotFound.class, () -> postService.get(post.getId() + 1L));
+        assertEquals("존재하지 않는 글입니다.", e.getMessage());
+    }
+
+    @Test
+    @DisplayName("게시글 삭제 - 존재하지 않는 글")
+    void test8() {
+        //given
+        Post post = Post.builder()
+                .title("foo")
+                .content("bar")
+                .build();
+        postRepository.save(post);
+
+        //expected
+        assertThrows(PostNotFound.class, () -> postService.delete(post.getId() + 1L));
+    }
+
+    @Test
+    @DisplayName("글 내용 수정 - 존재하지 않는 글")
+    void test9() {
+        //given
+        Post post = Post.builder()
+                .title("foo")
+                .content("bar")
+                .build();
+        postRepository.save(post);
+
+        PostEdit postEdit = PostEdit.builder()
+                .title("foo")
+                .content("내일도 출근")
+                .build();
+
+        //expected
+        assertThrows(PostNotFound.class, () -> postService.edit(post.getId() + 1L, postEdit));
     }
 }

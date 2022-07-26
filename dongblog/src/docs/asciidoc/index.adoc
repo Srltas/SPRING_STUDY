@@ -1,13 +1,21 @@
 = 동블로그 API
 :toc:
+
 == 글 단건조회
 
 === 요청
-
-include::{snippets}/index/curl-request.adoc[]
+include::{snippets}/index/http-request.adoc[]
+include::{snippets}/index/path-parameters.adoc[]
 
 === 응답
-include::{snippets}/index/http-request.adoc[]
+include::{snippets}/index/http-response.adoc[]
+include::{snippets}/index/response-fields.adoc[]
 
 === CURL
-include::{snippets}/index/http-response.adoc[]
+include::{snippets}/index/curl-request.adoc[]
+
+== 글 등록
+
+=== 요청
+include::{snippets}/index/http-request.adoc[]
+include::{snippets}/index/request-fields.adoc[]

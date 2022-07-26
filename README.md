@@ -49,3 +49,7 @@
    - controller, service 예외처리에 대한 테스트 코드 작성
    - 커스텀 예외(PostNotFound, InvalidRequest)를 만들어 예외처리
    - 상위 커스텀 예외(DongBlogException)를 만들어서 예외 공통처리
+   
+### 07-27
+ - Spring REST Docs를 이용해 문서화 학습
+   - Gradle 설정, Test 코드를 작성해 요청, 응답 필드 문서화

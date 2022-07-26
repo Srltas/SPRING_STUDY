@@ -260,7 +260,7 @@ class PostControllerTest {
     void test11() throws Exception {
         //given
         PostCreate request = PostCreate.builder()
-                .title("나는 바보입니다.")
+                .title("나는 Spring 바보..")
                 .content("내일도 출근..")
                 .build();
 

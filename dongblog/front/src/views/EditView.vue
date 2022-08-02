@@ -37,7 +37,7 @@ const edit = () => {
   </div>
 
   <div class="mt-2">
-    <el-input v-model="post.content"/>
+    <el-input v-model="post.content" type="textarea" rows="15"/>
   </div>
 
   <div class="mt-2">

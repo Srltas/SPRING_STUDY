@@ -1,0 +1,5 @@
+spring:
+  mvc:
+    # SpringBoot 최신버전과 Swagger 라이브러리 충돌 때문에 추가
+    pathmatch:
+      matching-strategy: ant_path_matcher
